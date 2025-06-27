@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296955372663",
+    "project_id": "azkar-4a907",
+    "storage_bucket": "azkar-4a907.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296955372663:android:9944a545234d242a449272",
+        "android_client_info": {
+          "package_name": "com.example.azkar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8H1jGg2pLe03IE2wSOWAK_KEJbB4IAlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
