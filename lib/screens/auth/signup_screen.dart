@@ -1,21 +1,22 @@
-import 'package:azkar/screens/auth/signup_screen.dart';
+import 'package:azkar/screens/auth/login_screen.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   bool isLoading = false; // Loading state
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
   final AuthService _authService =
       AuthService(); // Create auth service instance
   void _handleAuth() async {
@@ -24,9 +25,10 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       User? user;
 
-      user = await _authService.signInWithEmailPassword(
+      user = await _authService.registerWithEmailPassword(
         emailController.text.trim(),
         passwordController.text.trim(),
+        usernameController.text.trim(),
       );
 
       if (user != null) {
@@ -85,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Image.asset("assets/logo.png", height: 150),
                   const SizedBox(height: 20),
                   const Text(
-                    'Login to Azkar App',
+                    'SignUp to Azkar App',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -98,6 +100,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
 
                     style: TextStyle(color: Colors.grey, fontSize: 16),
+                  ),
+
+                  /// Email Field
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8, top: 8),
+                      child: Text(
+                        "User Name",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      right: 8,
+                      bottom: 8,
+                    ),
+                    child: TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: "Your Name",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   ),
 
                   /// Email Field
@@ -178,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           onPressed: isLoading ? null : _handleAuth,
                           child: Text(
-                            "Sign in",
+                            "Sign Up",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -204,13 +237,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (builder) => SignupScreen()),
+                        MaterialPageRoute(builder: (builder) => LoginScreen()),
                       );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Don't have an account? Sign Up",
+                        "Already have an account? Sign In",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
