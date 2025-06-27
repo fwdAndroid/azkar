@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:azkar/screens/qibla/qibla_compass.dart';
+import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:azkar/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
@@ -58,7 +59,7 @@ class _QiblaPageState extends State<QiblaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: DrawerWidget(),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
