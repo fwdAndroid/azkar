@@ -93,7 +93,7 @@ class _MainDashboardState extends State<MainDashboard> {
             BottomNavigationBarItem(
               label: "Settings",
               icon: _currentIndex == 4
-                  ? Icon(Icons.settings, size: 25, color: Color(0xff588B76))
+                  ? Icon(Icons.settings, size: 25, color: Colors.white)
                   : Icon(Icons.settings),
             ),
           ],
