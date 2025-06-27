@@ -1,5 +1,7 @@
 import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/screens/drawer_pages/tasbeeh_counter.dart';
+import 'package:azkar/screens/main/main_dashboard.dart';
+import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -84,10 +86,13 @@ class _DrawerWidgetState extends State<DrawerWidget>
               ),
             ),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AllahNames()),
-              // );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const MainDashboard(initialPageIndex: 3),
+                ),
+              );
             },
           ),
           Divider(),
@@ -135,10 +140,10 @@ class _DrawerWidgetState extends State<DrawerWidget>
               ),
             ),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AllahNames()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditProfile()),
+              );
             },
           ),
           Divider(),

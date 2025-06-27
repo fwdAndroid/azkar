@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MainDashboard extends StatefulWidget {
-  const MainDashboard({super.key});
+  final int initialPageIndex; // new
+
+  const MainDashboard({super.key, this.initialPageIndex = 0});
 
   @override
   State<MainDashboard> createState() => _MainDashboardState();
@@ -24,6 +26,12 @@ class _MainDashboardState extends State<MainDashboard> {
     QiblaPage(),
     SettingPage(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialPageIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
