@@ -1,3 +1,4 @@
+import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -47,10 +48,10 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 ),
               ),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => AllahNames()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AllahNames()),
+                );
               },
             ),
           ),
