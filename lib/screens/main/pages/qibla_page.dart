@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/qibla/qibla_compass.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:azkar/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 // import 'package:quranapp/screens/qibla/qibla_map.dart';
 
 class QiblaPage extends StatefulWidget {
@@ -58,6 +60,8 @@ class _QiblaPageState extends State<QiblaPage> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       drawer: DrawerWidget(),
       extendBodyBehindAppBar: true,
@@ -82,14 +86,25 @@ class _QiblaPageState extends State<QiblaPage> {
             if (snapshot.connectionState == ConnectionState.waiting)
               return LoadingIndicator();
             if (snapshot.hasError)
-              return Center(child: Text("Error: ${snapshot.error.toString()}"));
+              return Center(
+                child: Text(
+                  languageProvider.localizedStrings["Error"] ??
+                      "Error: ${snapshot.error.toString()}",
+                ),
+              );
 
             if (snapshot.data != null && snapshot.data == true)
               // Device supports the Sensor, Display Compass widget
               return QiblahCompass();
             else
               // Device does not support the sensor, Display Maps widget
-              return Center(child: Text("Your Device is Not Supported"));
+              return Center(
+                child: Text(
+                  languageProvider
+                          .localizedStrings["Your Device is Not Supported"] ??
+                      "Your Device is Not Supported",
+                ),
+              );
           },
         ),
       ),

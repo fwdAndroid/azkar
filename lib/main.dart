@@ -1,4 +1,5 @@
 import 'package:azkar/firebase_options.dart';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/prayer_time_provider.dart';
 import 'package:azkar/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +12,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        //  ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (context) => PrayerTimeProvider()),
       ],
       child: const MyApp(),

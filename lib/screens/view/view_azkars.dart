@@ -1,6 +1,8 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ViewAzkarPage extends StatelessWidget {
   final String azkarType;
@@ -8,6 +10,8 @@ class ViewAzkarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       extendBodyBehindAppBar: true,
 
@@ -15,7 +19,10 @@ class ViewAzkarPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
 
         iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Azkar", style: TextStyle(color: Colors.white)),
+        title: Text(
+          languageProvider.localizedStrings["Azkar"] ?? "Azkar",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -36,7 +43,12 @@ class ViewAzkarPage extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             }
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return Center(child: Text("No Azkar found."));
+              return Center(
+                child: Text(
+                  languageProvider.localizedStrings["No Azkar found."] ??
+                      "No Azkar found.",
+                ),
+              );
             }
 
             final azkarList = snapshot.data!.docs;

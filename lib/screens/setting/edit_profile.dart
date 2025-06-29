@@ -1,3 +1,4 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/utils/show_message.dart';
 import 'package:azkar/widgets/save_button_widget.dart';
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -38,6 +40,8 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -46,7 +50,10 @@ class _EditProfileState extends State<EditProfile> {
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
           centerTitle: true,
-          title: Text("Edit Profile", style: TextStyle(color: Colors.white)),
+          title: Text(
+            languageProvider.localizedStrings["Edit Profile"] ?? "Edit Profile",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
 
         body: Stack(
@@ -101,7 +108,9 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       )
                     : SaveButton(
-                        title: "Edit Profile",
+                        title:
+                            languageProvider.localizedStrings["Edit Profile"] ??
+                            "Edit Profile",
                         onTap: () async {
                           setState(() {
                             _isLoading = true;
@@ -113,13 +122,16 @@ class _EditProfileState extends State<EditProfile> {
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .update({"username": nameController.text});
                             showMessageBar(
-                              "Successfully Updated Profile",
+                              languageProvider
+                                      .localizedStrings["Successfully Updated Profile"] ??
+                                  "Successfully Updated Profile",
                               context,
                             );
                           } catch (e) {
-                            print("Error updating profile: $e");
                             showMessageBar(
-                              "Profile could not be updated",
+                              languageProvider
+                                      .localizedStrings["Profile could not be updated"] ??
+                                  "Profile could not be updated",
                               context,
                             );
                           } finally {

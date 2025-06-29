@@ -1,9 +1,12 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/screens/drawer_pages/tasbeeh_counter.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
+import 'package:azkar/screens/setting/change_language.dart';
 import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -30,6 +33,8 @@ class _DrawerWidgetState extends State<DrawerWidget>
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Drawer(
       backgroundColor: Color(0xff097132),
       child: Column(
@@ -43,7 +48,8 @@ class _DrawerWidgetState extends State<DrawerWidget>
             padding: const EdgeInsets.only(top: 8.0),
             child: ListTile(
               title: Text(
-                'Allah Names',
+                languageProvider.localizedStrings["Allah Names"] ??
+                    'Allah Names',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w300,
@@ -61,7 +67,8 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Divider(),
           ListTile(
             title: Text(
-              'Tasbeeh Counter',
+              languageProvider.localizedStrings["Tasbeeh Counter"] ??
+                  'Tasbeeh Counter',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -78,7 +85,8 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Divider(),
           ListTile(
             title: Text(
-              'Qibla Direction',
+              languageProvider.localizedStrings["Qibla Direction"] ??
+                  'Qibla Direction',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -98,7 +106,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Divider(),
           ListTile(
             title: Text(
-              'Quran',
+              languageProvider.localizedStrings["Quran"] ?? 'Quran',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -118,7 +126,8 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Divider(),
           ListTile(
             title: Text(
-              'Language Setting',
+              languageProvider.localizedStrings["Language Setting"] ??
+                  'Language Setting',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -126,16 +135,16 @@ class _DrawerWidgetState extends State<DrawerWidget>
               ),
             ),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AllahNames()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (builder) => ChangeLangage()),
+              );
             },
           ),
           Divider(),
           ListTile(
             title: Text(
-              'My Profile',
+              languageProvider.localizedStrings["My Profile"] ?? 'My Profile',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -159,7 +168,10 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 },
               );
             },
-            title: Text("Logout", style: TextStyle(color: Colors.white)),
+            title: Text(
+              languageProvider.localizedStrings["Logout"] ?? "Logout",
+              style: TextStyle(color: Colors.white),
+            ),
             leading: Icon(Icons.logout, color: Colors.red),
           ),
         ],

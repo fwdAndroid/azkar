@@ -1,6 +1,9 @@
+import 'package:azkar/provider/language_provider.dart';
+import 'package:azkar/screens/setting/change_language.dart';
 import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SettingPage extends StatefulWidget {
@@ -13,6 +16,8 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       body: Stack(
         children: [
@@ -38,7 +43,8 @@ class _SettingPageState extends State<SettingPage> {
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
                   title: Text(
-                    "Notifications",
+                    languageProvider.localizedStrings["Notifications"] ??
+                        "Notifications",
                     style: TextStyle(color: Colors.white),
                   ),
                   leading: Icon(Icons.notifications, color: Colors.white),
@@ -55,7 +61,8 @@ class _SettingPageState extends State<SettingPage> {
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
                   title: Text(
-                    "Edit Profile",
+                    languageProvider.localizedStrings["Edit Profile"] ??
+                        "Edit Profile",
                     style: TextStyle(color: Colors.white),
                   ),
                   leading: Icon(Icons.person, color: Colors.white),
@@ -65,14 +72,15 @@ class _SettingPageState extends State<SettingPage> {
                 padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
                 child: ListTile(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (builder) => ChangeLangage()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => ChangeLangage()),
+                    );
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
                   title: Text(
-                    "Change Language",
+                    languageProvider.localizedStrings["Change Language"] ??
+                        "Change Language",
                     style: TextStyle(color: Colors.white),
                   ),
                   leading: Icon(Icons.language, color: Colors.white),
@@ -86,7 +94,8 @@ class _SettingPageState extends State<SettingPage> {
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
                   title: Text(
-                    "Invite Friends",
+                    languageProvider.localizedStrings["Invite Friends"] ??
+                        "Invite Friends",
                     style: TextStyle(color: Colors.white),
                   ),
                   leading: Icon(Icons.share, color: Colors.white),
@@ -120,7 +129,7 @@ class _SettingPageState extends State<SettingPage> {
                       );
                     },
                     child: Text(
-                      "Log out",
+                      languageProvider.localizedStrings["Logout"] ?? "Logout",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

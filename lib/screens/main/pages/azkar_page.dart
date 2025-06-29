@@ -1,3 +1,4 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/screens/view/view_azkars.dart';
 import 'package:azkar/widgets/azkar_title_widget.dart';
@@ -5,6 +6,7 @@ import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AzkarPage extends StatefulWidget {
@@ -24,6 +26,8 @@ class _AzkarPageState extends State<AzkarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -119,8 +123,10 @@ class _AzkarPageState extends State<AzkarPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                          "Today's Dua",
+                                        Text(
+                                          languageProvider
+                                                  .localizedStrings["Today's Dua"] ??
+                                              "Today's Dua",
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,

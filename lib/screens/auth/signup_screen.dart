@@ -1,8 +1,10 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/auth/login_screen.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -67,6 +69,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       resizeToAvoidBottomInset: true, // Important for keyboard interaction
       body: SafeArea(
@@ -86,8 +90,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 40),
                   Image.asset("assets/logo.png", height: 150),
                   const SizedBox(height: 20),
-                  const Text(
-                    'SignUp to Azkar App',
+                  Text(
+                    languageProvider.localizedStrings["SignUp to Azkar App"] ??
+                        'SignUp to Azkar App',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -95,20 +100,23 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Begin each day with guidance from Allah.\n Let prayer shape your path and purpose.',
+                  Text(
+                    languageProvider
+                            .localizedStrings["Begin each day with guidance from Allah.\n Let prayer shape your path and purpose."] ??
+                        'Begin each day with guidance from Allah.\n Let prayer shape your path and purpose.',
                     textAlign: TextAlign.center,
 
                     style: TextStyle(color: Colors.grey, fontSize: 16),
                   ),
 
                   /// Email Field
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
                       child: Text(
-                        "User Name",
+                        languageProvider.localizedStrings["User Name"] ??
+                            "User Name",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -125,7 +133,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
-                        hintText: "Your Name",
+                        hintText:
+                            languageProvider.localizedStrings["Your Name"] ??
+                            "Your Name",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -134,12 +144,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   /// Email Field
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
                       child: Text(
-                        "Email address",
+                        languageProvider.localizedStrings["Email address"] ??
+                            "Email address",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -156,19 +167,22 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
-                        hintText: "Your email",
+                        hintText:
+                            languageProvider.localizedStrings["Your email"] ??
+                            "Your email",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
                       child: Text(
-                        "Password",
+                        languageProvider.localizedStrings["Password"] ??
+                            "Password",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -186,7 +200,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
-                        hintText: "Password",
+                        hintText:
+                            languageProvider.localizedStrings["Password"] ??
+                            "Password",
                         suffixIcon: Icon(Icons.visibility_off),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -211,7 +227,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           onPressed: isLoading ? null : _handleAuth,
                           child: Text(
-                            "Sign Up",
+                            languageProvider.localizedStrings["Sign Up"] ??
+                                "Sign Up",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -219,8 +236,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    "Other sign in options",
+                  Text(
+                    languageProvider
+                            .localizedStrings["Other sign in options"] ??
+                        "Other sign in options",
                     style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(height: 10),
@@ -243,7 +262,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Already have an account? Sign In",
+                        languageProvider
+                                .localizedStrings["Already have an account? Sign In"] ??
+                            "Already have an account? Sign In",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

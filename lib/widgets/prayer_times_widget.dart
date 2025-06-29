@@ -1,4 +1,5 @@
 // lib/widgets/prayer_times.dart
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/prayer_time_provider.dart';
 import 'package:azkar/service/prayer_location.dart';
 import 'package:azkar/service/prayer_model.dart';
@@ -13,6 +14,7 @@ class PrayerTimesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PrayerTimeProvider>(context);
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -34,8 +36,9 @@ class PrayerTimesWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Prayer Times',
+              Text(
+                languageProvider.localizedStrings['Prayer Times'] ??
+                    'Prayer Times',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -72,7 +75,9 @@ class PrayerTimesWidget extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: provider.resetToCurrentLocation,
-                    child: const Text('Reset to Current'),
+                    child:
+                        languageProvider.localizedStrings['Reset to Current'] ??
+                        Text('Reset to Current'),
                   ),
                 ],
               ),
@@ -91,7 +96,9 @@ class PrayerTimesWidget extends StatelessWidget {
             ),
 
           SaveButton(
-            title: "Search Location",
+            title:
+                languageProvider.localizedStrings['Search Location'] ??
+                "Search Location",
             onTap: () async {
               final newLocation = await Navigator.push<PrayerLocation>(
                 context,

@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:http/http.dart' as http;
@@ -106,14 +108,17 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (groupedAyahs.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'No bookmarked Ayahs yet',
+          languageProvider.localizedStrings["No bookmarked Ayahs yet"] ??
+              'No bookmarked Ayahs yet',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
       );

@@ -1,9 +1,11 @@
 import 'package:azkar/api/api_calls.dart';
 import 'package:azkar/model/qari_model.dart';
 import 'package:azkar/model/surrah_model.dart' as surah;
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_screen.dart';
 import 'package:azkar/utils/constatnns.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AudioSurahScreen extends StatefulWidget {
   const AudioSurahScreen({Key? key, required this.qari}) : super(key: key);
@@ -26,6 +28,8 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -34,7 +38,7 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            'Surah List',
+            languageProvider.localizedStrings["Surah List"] ?? 'Surah List',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

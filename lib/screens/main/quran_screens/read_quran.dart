@@ -1,7 +1,9 @@
 import 'package:azkar/api/api_calls.dart';
 import 'package:azkar/model/quran_model.dart';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/surah_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReadQuran extends StatefulWidget {
   const ReadQuran({super.key});
@@ -21,6 +23,8 @@ class _ReadQuranState extends State<ReadQuran> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return FutureBuilder<QuranModel>(
       future: _quranText,
       builder: (context, snapshot) {
@@ -62,8 +66,9 @@ class _ReadQuranState extends State<ReadQuran> {
 
                       Text(
                         surah.revelationType!.toString().substring(15) +
-                            ' • ' +
-                            surah.ayahs!.length.toString() +
+                                ' • ' +
+                                surah.ayahs!.length.toString() +
+                                languageProvider.localizedStrings["Verses"] ??
                             ' Verses',
                         style: const TextStyle(
                           color: Colors.white,

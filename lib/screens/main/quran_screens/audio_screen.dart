@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:azkar/model/qari_model.dart';
 import 'package:azkar/model/surrah_model.dart';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/utils/constatnns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AudioScreen extends StatefulWidget {
@@ -93,6 +95,8 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     // double _width = MediaQuery.of(context).size.width;
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -105,7 +109,7 @@ class _AudioScreenState extends State<AudioScreen> {
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: Text(
-          'Now Playing',
+          languageProvider.localizedStrings["Now Playing"] ?? 'Now Playing',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
         ),
       ),
@@ -143,7 +147,8 @@ class _AudioScreenState extends State<AudioScreen> {
                       ),
                     ),
                     Text(
-                      'Total Aya : ${widget.list![currentIndex].numberOfAyahs}',
+                      languageProvider.localizedStrings["Total Aya"] ??
+                          'Total Aya : ${widget.list![currentIndex].numberOfAyahs}',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ],
@@ -310,7 +315,10 @@ class _AudioScreenState extends State<AudioScreen> {
                       onPressed: () {
                         showSliderDialog(
                           context: context,
-                          title: "Adjust volume",
+                          title:
+                              languageProvider
+                                  .localizedStrings["Adjust volume"] ??
+                              "Adjust volume",
                           divisions: 10,
                           min: 0.0,
                           max: 1.0,
@@ -372,7 +380,9 @@ class _AudioScreenState extends State<AudioScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'UPCOMING SURAH',
+                                languageProvider
+                                        .localizedStrings["UPCOMING SURAH"] ??
+                                    'UPCOMING SURAH',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,

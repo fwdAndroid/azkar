@@ -1,9 +1,11 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/auth/login_screen.dart';
 import 'package:azkar/utils/show_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class LogoutWidget extends StatelessWidget {
   const LogoutWidget({super.key});
@@ -11,6 +13,7 @@ class LogoutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
 
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
@@ -28,7 +31,9 @@ class LogoutWidget extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Oh No, you're leaving",
+                      languageProvider
+                              .localizedStrings["Oh No, you're leaving"] ??
+                          "Oh No, you're leaving",
                       style: GoogleFonts.workSans(
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
@@ -41,7 +46,9 @@ class LogoutWidget extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Are you sure you want to log out?",
+                      languageProvider
+                              .localizedStrings['Are you sure you want to log out?'] ??
+                          "Are you sure you want to log out?",
                       style: GoogleFonts.workSans(
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
@@ -65,7 +72,10 @@ class LogoutWidget extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("No", style: TextStyle(color: Colors.black)),
+              child: Text(
+                languageProvider.localizedStrings['No'] ?? "No",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             const SizedBox(width: 10),
             ElevatedButton(
@@ -85,7 +95,10 @@ class LogoutWidget extends StatelessWidget {
                 // Show snack bar message
                 showMessageBar("Logout Successfully", context);
               },
-              child: Text("Yes", style: TextStyle(color: Colors.white)),
+              child: Text(
+                languageProvider.localizedStrings['Yes'] ?? "Yes",
+                style: TextStyle(color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(137, 50),
                 backgroundColor: Color(0xFF097132),

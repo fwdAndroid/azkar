@@ -1,5 +1,7 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/utils/allah_names_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AllahNames extends StatefulWidget {
   const AllahNames({super.key});
@@ -25,6 +27,8 @@ class _AllahNamesState extends State<AllahNames> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     final name = names[currentIndex];
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -40,7 +44,10 @@ class _AllahNamesState extends State<AllahNames> {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        title: Text("Allah Names", style: TextStyle(color: Colors.white)),
+        title: Text(
+          languageProvider.localizedStrings["Allah Names"] ?? "Allah Names",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: GestureDetector(
         onHorizontalDragEnd: (details) {
@@ -114,7 +121,9 @@ class _AllahNamesState extends State<AllahNames> {
                     vertical: 12,
                   ),
                 ),
-                child: const Text("Next"),
+                child: Text(
+                  languageProvider.localizedStrings["Next"] ?? "Next",
+                ),
               ),
             ],
           ),

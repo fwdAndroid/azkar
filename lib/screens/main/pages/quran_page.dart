@@ -1,9 +1,11 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_quran.dart';
 import 'package:azkar/screens/main/quran_screens/book_mark_screen.dart';
 import 'package:azkar/screens/main/quran_screens/juz_screen.dart';
 import 'package:azkar/screens/main/quran_screens/read_quran.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuranPage extends StatefulWidget {
   const QuranPage({super.key});
@@ -27,6 +29,8 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
@@ -45,20 +49,33 @@ class _QuranPageState extends State<QuranPage> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               iconTheme: IconThemeData(color: Colors.white),
-              title: const Text('Quran', style: TextStyle(color: Colors.white)),
+              title: Text(
+                languageProvider.localizedStrings["Quran"] ?? 'Quran',
+                style: TextStyle(color: Colors.white),
+              ),
               backgroundColor: Colors.transparent,
               elevation: 0,
-              bottom: const TabBar(
+              bottom: TabBar(
                 isScrollable: true, // ← Enables scrollable tabs
                 dividerColor: Colors.transparent,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white70,
                 indicatorColor: Colors.white,
                 tabs: <Widget>[
-                  Tab(text: 'Quran'),
-                  Tab(text: 'Audio Quran'),
-                  Tab(text: "Juz"),
-                  Tab(text: 'BookMark'),
+                  Tab(
+                    text: languageProvider.localizedStrings["Quran"] ?? 'Quran',
+                  ),
+                  Tab(
+                    text:
+                        languageProvider.localizedStrings["Audio Quran"] ??
+                        'Audio Quran',
+                  ),
+                  Tab(text: languageProvider.localizedStrings["Juz"] ?? "Juz"),
+                  Tab(
+                    text:
+                        languageProvider.localizedStrings["BookMark"] ??
+                        'BookMark',
+                  ),
                 ],
               ),
             ),
