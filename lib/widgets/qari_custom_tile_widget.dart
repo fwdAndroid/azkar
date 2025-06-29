@@ -17,12 +17,12 @@ class _QariCustomTileState extends State<QariCustomTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.ontap,
-      child: Column(
+      child: Row(
         children: [
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: CircleAvatar(
-              radius: 40,
+              radius: 20,
               backgroundImage: AssetImage('assets/logo.png'),
             ),
           ),
@@ -31,7 +31,7 @@ class _QariCustomTileState extends State<QariCustomTile> {
             child: Text(
               widget.qari.name!,
               // 'Res',
-              style: const TextStyle(color: Colors.white, fontSize: 10),
+              style: const TextStyle(color: Colors.white, fontSize: 14),
               overflow: TextOverflow.fade,
             ),
           ),

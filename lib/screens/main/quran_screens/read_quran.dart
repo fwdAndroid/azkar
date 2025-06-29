@@ -29,7 +29,6 @@ class _ReadQuranState extends State<ReadQuran> {
             itemCount: snapshot.data!.data!.surahs!.length,
             itemBuilder: (BuildContext context, int index) {
               var surah = snapshot.data!.data!.surahs![index];
-              print(surah);
               return InkWell(
                 onTap: () => {
                   Navigator.of(context).push(
@@ -39,33 +38,35 @@ class _ReadQuranState extends State<ReadQuran> {
                   ),
                 },
                 child: Container(
+                  height: 150,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: const Color(
+                      0xFFD9D9D9,
+                    ).withOpacity(0.19), // 19% opacity
                   ),
-                  margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
+                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                   width: MediaQuery.of(this.context).size.width,
                   // height: 100,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        child: Text(
-                          surah.englishName!,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xff555555),
-                          ),
+                      Text(
+                        surah.name!,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
                         ),
                       ),
+
                       Text(
                         surah.revelationType!.toString().substring(15) +
                             ' • ' +
                             surah.ayahs!.length.toString() +
                             ' Verses',
                         style: const TextStyle(
-                          color: Color(0xffAEAEAE),
+                          color: Colors.white,
                           fontSize: 16,
                         ),
                       ),

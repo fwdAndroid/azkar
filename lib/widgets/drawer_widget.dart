@@ -106,10 +106,13 @@ class _DrawerWidgetState extends State<DrawerWidget>
               ),
             ),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AllahNames()),
-              // );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const MainDashboard(initialPageIndex: 1),
+                ),
+              );
             },
           ),
           Divider(),

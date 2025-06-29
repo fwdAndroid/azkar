@@ -23,31 +23,31 @@ class _PrayerPageState extends State<PrayerPage> {
       });
     }
 
-    return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
 
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/bg.png"),
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
-            ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/bg.png"),
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.high,
           ),
-          child: RefreshIndicator(
-            onRefresh: () async => provider.loadLocationAndPrayerTimes(),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  const HijriWidget(),
-                  const SizedBox(height: 20),
-                  const PrayerTimesWidget(),
-                ],
-              ),
+        ),
+        child: RefreshIndicator(
+          onRefresh: () async => provider.loadLocationAndPrayerTimes(),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+
+                const HijriWidget(),
+                const SizedBox(height: 20),
+                const PrayerTimesWidget(),
+              ],
             ),
           ),
         ),

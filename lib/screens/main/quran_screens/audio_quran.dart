@@ -40,17 +40,22 @@ class _AudioQuranState extends State<AudioQuran> {
           child: ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              return QariCustomTile(
-                qari: snapshot.data![index],
-                ontap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          AudioSurahScreen(qari: snapshot.data![index]),
-                    ),
-                  );
-                },
+              return Column(
+                children: [
+                  QariCustomTile(
+                    qari: snapshot.data![index],
+                    ontap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AudioSurahScreen(qari: snapshot.data![index]),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(),
+                ],
               );
             },
           ),
