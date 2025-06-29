@@ -75,9 +75,10 @@ class PrayerTimesWidget extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: provider.resetToCurrentLocation,
-                    child:
-                        languageProvider.localizedStrings['Reset to Current'] ??
-                        Text('Reset to Current'),
+                    child: Text(
+                      languageProvider.localizedStrings['Reset to Current'] ??
+                          'Reset to Current',
+                    ),
                   ),
                 ],
               ),
