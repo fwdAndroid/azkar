@@ -1,7 +1,5 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_quran.dart';
-import 'package:azkar/screens/main/quran_screens/book_mark_screen.dart';
-import 'package:azkar/screens/main/quran_screens/juz_screen.dart';
 import 'package:azkar/screens/main/quran_screens/read_quran.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +31,7 @@ class _QuranPageState extends State<QuranPage> {
 
     return DefaultTabController(
       initialIndex: 0,
-      length: 4,
+      length: 2,
       child: Stack(
         children: [
           Container(
@@ -70,23 +68,10 @@ class _QuranPageState extends State<QuranPage> {
                         languageProvider.localizedStrings["Audio Quran"] ??
                         'Audio Quran',
                   ),
-                  Tab(text: languageProvider.localizedStrings["Juz"] ?? "Juz"),
-                  Tab(
-                    text:
-                        languageProvider.localizedStrings["BookMark"] ??
-                        'BookMark',
-                  ),
                 ],
               ),
             ),
-            body: TabBarView(
-              children: <Widget>[
-                ReadQuran(),
-                AudioQuran(),
-                JuzScreen(),
-                BookmarksScreen(), // Pass the ayahs here
-              ],
-            ),
+            body: TabBarView(children: <Widget>[ReadQuran(), AudioQuran()]),
           ),
         ],
       ),

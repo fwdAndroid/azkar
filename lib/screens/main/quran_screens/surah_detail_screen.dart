@@ -15,11 +15,10 @@ class SuratDetailsPage extends StatefulWidget {
 class _SuratDetailsPageState extends State<SuratDetailsPage> {
   late AudioPlayer _audioPlayer;
   bool isPlaying = false;
-  int currentPage = 0;
-  List<List<dynamic>> pages = [];
   final ScrollController _scrollController = ScrollController();
-  double estimatedAyahHeight = 100.0;
 
+  int currentPage = 0;
+  List<List<dynamic>> pagedAyahs = [];
   Set<String> bookmarkedAyahs = {};
 
   @override
@@ -30,6 +29,35 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
       await loadBookmarks();
       paginateAyahs();
     });
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  String toArabicNumber(int number) {
+    final arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    return number
+        .toString()
+        .split('')
+        .map((e) => arabicDigits[int.parse(e)])
+        .join();
+  }
+
+  void paginateAyahs() {
+    final ayahs = widget.snap.ayahs;
+    final int pageSize = 8; // Tune this for more/fewer ayahs per page
+    pagedAyahs.clear();
+
+    for (int i = 0; i < ayahs.length; i += pageSize) {
+      int end = (i + pageSize < ayahs.length) ? i + pageSize : ayahs.length;
+      pagedAyahs.add(ayahs.sublist(i, end));
+    }
+
+    setState(() {});
   }
 
   Future<void> loadBookmarks() async {
@@ -67,26 +95,6 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
     return bookmarkedAyahs.contains('$surah:$ayah');
   }
 
-  void paginateAyahs() {
-    List ayahs = widget.snap.ayahs;
-    double screenHeight = MediaQuery.of(context).size.height;
-    int ayahsPerPage = ((screenHeight * 0.6) / estimatedAyahHeight).floor();
-    for (int i = 0; i < ayahs.length; i += ayahsPerPage) {
-      int end = (i + ayahsPerPage < ayahs.length)
-          ? i + ayahsPerPage
-          : ayahs.length;
-      pages.add(ayahs.sublist(i, end));
-    }
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
-
   Future<void> playAudioFromAlQuranCloud(int surah, int ayah) async {
     final url = 'https://api.alquran.cloud/v1/ayah/$surah:$ayah/ar.alafasy';
     final res = await http.get(Uri.parse(url));
@@ -110,6 +118,9 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final surah = widget.snap.number;
+    final totalAyahs = widget.snap.ayahs.length;
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -123,6 +134,7 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
           ),
           child: Column(
             children: [
+              // Header
               Row(
                 children: [
                   IconButton(
@@ -130,95 +142,100 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    widget.snap.name ?? '',
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                  Expanded(
+                    child: Text(
+                      '${widget.snap.name} - ${toArabicNumber(totalAyahs)} آيات',
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
-              if (pages.isEmpty)
+
+              // Main Ayah List (Per Page)
+              if (pagedAyahs.isEmpty)
                 const Expanded(
                   child: Center(child: CircularProgressIndicator()),
                 )
               else
                 Expanded(
-                  child: NotificationListener<ScrollNotification>(
-                    onNotification: (ScrollNotification scrollInfo) {
-                      if (scrollInfo.metrics.pixels ==
-                              scrollInfo.metrics.maxScrollExtent &&
-                          currentPage < pages.length - 1) {
-                        setState(() => currentPage++);
-                      } else if (scrollInfo.metrics.pixels ==
-                              scrollInfo.metrics.minScrollExtent &&
-                          currentPage > 0) {
-                        setState(() => currentPage--);
-                      }
-                      return false;
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black.withOpacity(0.2),
-                      ),
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: pages[currentPage].length,
-                        itemBuilder: (context, index) {
-                          final ayah = pages[currentPage][index];
-                          final surah = widget.snap.number;
-                          final ayahNum = ayah.numberInSurah;
-                          return Card(
-                            color: Colors.white.withOpacity(0.1),
-                            child: ListTile(
-                              title: Text(
-                                ayah.text,
-                                textAlign: TextAlign.right,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      isBookmarked(surah, ayahNum)
-                                          ? Icons.bookmark
-                                          : Icons.bookmark_border,
-                                      color: Colors.yellow,
-                                    ),
-                                    onPressed: () =>
-                                        toggleBookmark(surah, ayahNum),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      isPlaying ? Icons.stop : Icons.play_arrow,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () async {
-                                      if (isPlaying) {
-                                        await stopAudio();
-                                      } else {
-                                        await playAudioFromAlQuranCloud(
-                                          surah,
-                                          ayahNum,
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ],
+                  child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: pagedAyahs[currentPage].length,
+                      itemBuilder: (context, index) {
+                        final ayah = pagedAyahs[currentPage][index];
+                        final ayahNum = ayah.numberInSurah;
+                        return Card(
+                          color: Colors.white.withOpacity(0.1),
+                          child: ListTile(
+                            title: Text(
+                              ayah.text,
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
                               ),
                             ),
-                          );
-                        },
-                      ),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '(${toArabicNumber(ayahNum)})',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        isBookmarked(surah, ayahNum)
+                                            ? Icons.bookmark
+                                            : Icons.bookmark_border,
+                                        color: Colors.yellow,
+                                      ),
+                                      onPressed: () =>
+                                          toggleBookmark(surah, ayahNum),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        isPlaying
+                                            ? Icons.stop
+                                            : Icons.play_arrow,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () async {
+                                        if (isPlaying) {
+                                          await stopAudio();
+                                        } else {
+                                          await playAudioFromAlQuranCloud(
+                                            surah,
+                                            ayahNum,
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
-              if (pages.isNotEmpty)
+
+              // Navigation Buttons
+              if (pagedAyahs.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -230,23 +247,24 @@ class _SuratDetailsPageState extends State<SuratDetailsPage> {
                       if (currentPage > 0)
                         ElevatedButton(
                           onPressed: () {
-                            setState(() => currentPage--);
-                            _scrollController.jumpTo(0);
+                            setState(() {
+                              currentPage--;
+                              _scrollController.jumpTo(0);
+                            });
                           },
                           child: const Text('Previous'),
                         ),
                       Text(
-                        'Page ${currentPage + 1} of ${pages.length}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                        'Page ${currentPage + 1} of ${pagedAyahs.length}',
+                        style: const TextStyle(color: Colors.white),
                       ),
-                      if (currentPage < pages.length - 1)
+                      if (currentPage < pagedAyahs.length - 1)
                         ElevatedButton(
                           onPressed: () {
-                            setState(() => currentPage++);
-                            _scrollController.jumpTo(0);
+                            setState(() {
+                              currentPage++;
+                              _scrollController.jumpTo(0);
+                            });
                           },
                           child: const Text('Next'),
                         ),
