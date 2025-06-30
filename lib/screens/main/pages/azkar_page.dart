@@ -1,5 +1,4 @@
 import 'package:azkar/provider/language_provider.dart';
-import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/screens/view/view_azkars.dart';
 import 'package:azkar/widgets/azkar_title_widget.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
@@ -7,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AzkarPage extends StatefulWidget {
   const AzkarPage({super.key});
@@ -18,6 +16,8 @@ class AzkarPage extends StatefulWidget {
 
 class _AzkarPageState extends State<AzkarPage> {
   late HijriCalendar _hijriDate;
+  final PageController _pageController = PageController(viewportFraction: 0.9);
+
   @override
   void initState() {
     super.initState();
@@ -26,17 +26,16 @@ class _AzkarPageState extends State<AzkarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+    final languageProvider = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Colors.white, // or white depending on bg
+        foregroundColor: Colors.white,
       ),
       drawer: DrawerWidget(),
-      extendBodyBehindAppBar:
-          true, // allows background image to go under appbar
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           Image.asset(
@@ -45,25 +44,25 @@ class _AzkarPageState extends State<AzkarPage> {
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.cover,
           ),
-          // Add content here if needed
           SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Hijri Date
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, bottom: 4),
                     child: Text(
                       "${_hijriDate.toFormat("dd MMMM, yyyy")} AH",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.start,
                     ),
                   ),
+
+                  // Dua Section
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('dua')
@@ -87,27 +86,26 @@ class _AzkarPageState extends State<AzkarPage> {
                       }
 
                       final posts = snapshot.data!.docs;
-                      final pageController = PageController(
-                        viewportFraction: 0.9,
-                      );
 
                       return Column(
                         children: [
                           SizedBox(
                             height: 200,
-                            width: MediaQuery.of(context).size.width,
                             child: PageView.builder(
-                              scrollDirection: Axis.horizontal,
-                              controller: pageController,
+                              controller: _pageController,
                               itemCount: posts.length,
                               itemBuilder: (context, index) {
                                 final post =
                                     posts[index].data() as Map<String, dynamic>;
+
                                 return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: const Color(
                                       0xFFD9D9D9,
-                                    ).withOpacity(0.19), // 19% opacity
+                                    ).withOpacity(0.19),
                                     borderRadius: BorderRadius.circular(20),
                                     boxShadow: [
                                       BoxShadow(
@@ -127,7 +125,7 @@ class _AzkarPageState extends State<AzkarPage> {
                                           languageProvider
                                                   .localizedStrings["Today's Dua"] ??
                                               "Today's Dua",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
@@ -148,15 +146,42 @@ class _AzkarPageState extends State<AzkarPage> {
                                             ),
                                           ),
                                         ),
-                                        SmoothPageIndicator(
-                                          controller: pageController,
-                                          count: posts.length,
-                                          effect: const ExpandingDotsEffect(
-                                            activeDotColor: Colors.white,
-                                            dotColor: Color(0xFFD9D9D9),
-                                            dotHeight: 8,
-                                            dotWidth: 8,
-                                            spacing: 6,
+                                        // 👇 Page Indicator below the PageView
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 16.0,
+                                            top: 8,
+                                          ),
+                                          child: Row(
+                                            children: List.generate(
+                                              posts.length,
+                                              (index) {
+                                                bool isActive =
+                                                    (_pageController
+                                                        .hasClients &&
+                                                    _pageController.page
+                                                            ?.round() ==
+                                                        index);
+
+                                                return AnimatedContainer(
+                                                  duration: const Duration(
+                                                    milliseconds: 300,
+                                                  ),
+                                                  margin:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 4,
+                                                      ),
+                                                  width: isActive ? 12 : 8,
+                                                  height: isActive ? 12 : 8,
+                                                  decoration: BoxDecoration(
+                                                    color: isActive
+                                                        ? Colors.white
+                                                        : Colors.white54,
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -166,117 +191,79 @@ class _AzkarPageState extends State<AzkarPage> {
                               },
                             ),
                           ),
+
+                          const SizedBox(height: 16),
                         ],
                       );
                     },
                   ),
 
-                  //Morning
+                  // Azkar Sections
                   AzkarTitleWidget(
                     image: "assets/morning.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'morningazkaar'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'morningazkaar'),
+                      ),
+                    ),
                     text: "أذكار الصباح",
                   ),
-
-                  //Evemin
                   AzkarTitleWidget(
                     image: "assets/evening.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'eveningazkaar'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'eveningazkaar'),
+                      ),
+                    ),
                     text: "أذكار المساء",
                   ),
-                  //Night
                   AzkarTitleWidget(
                     image: "assets/night.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'nightAzkar'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'nightAzkar'),
+                      ),
+                    ),
                     text: "أذكار النوم",
                   ),
-                  //After The Prayers
                   AzkarTitleWidget(
                     image: "assets/after.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'afterPrayer'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'afterPrayer'),
+                      ),
+                    ),
                     text: "بعد الصلوات",
                   ),
-                  //Confronting a metaphor
                   AzkarTitleWidget(
                     image: "assets/books.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'metaphor'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'metaphor'),
+                      ),
+                    ),
                     text: "مواجهة تشبيه",
                   ),
-                  //Benefits
                   AzkarTitleWidget(
                     image: "assets/benifit.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) =>
-                              ViewAzkarPage(azkarType: 'azkarbenefits'),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            ViewAzkarPage(azkarType: 'azkarbenefits'),
+                      ),
+                    ),
                     text: "فوائد الأذكار",
-                  ),
-                  //Allah Names
-                  AzkarTitleWidget(
-                    image: "assets/elements.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (builder) => AllahNames()),
-                      );
-                    },
-                    text: "أسماء الله",
-                  ),
-                  //Hajj and Ummrah
-                  AzkarTitleWidget(
-                    image: "assets/hajj.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (builder) => AllahNames()),
-                      );
-                    },
-                    text: "الحج والعمرة",
                   ),
                 ],
               ),
