@@ -1,26 +1,115 @@
 {
   "project_info": {
-    "project_number": "296955372663",
-    "project_id": "azkar-4a907",
-    "storage_bucket": "azkar-4a907.firebasestorage.app"
+    "project_number": "309649663701",
+    "project_id": "star-44459",
+    "storage_bucket": "star-44459.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296955372663:android:9944a545234d242a449272",
+        "mobilesdk_app_id": "1:309649663701:android:330e1b53d598058a56a45c",
         "android_client_info": {
-          "package_name": "com.example.azkar"
+          "package_name": "com.azkaradmin.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyA8H1jGg2pLe03IE2wSOWAK_KEJbB4IAlw"
+          "current_key": "AIzaSyCDiVeIJnu9JtL54pgSwSeUR57Accp6yz4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "309649663701-kjlc0o0bhdf27g0f7frfqcrv460hlt75.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.azkaradmin.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309649663701:android:0b6220cdcd49dc6356a45c",
+        "android_client_info": {
+          "package_name": "com.example.azkar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDiVeIJnu9JtL54pgSwSeUR57Accp6yz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "309649663701-kjlc0o0bhdf27g0f7frfqcrv460hlt75.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.azkaradmin.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309649663701:android:437191854583a41056a45c",
+        "android_client_info": {
+          "package_name": "com.example.azkar_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDiVeIJnu9JtL54pgSwSeUR57Accp6yz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309649663701-2fm37ecqenl4d7incb057ftfr6niqkcf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "309649663701-kjlc0o0bhdf27g0f7frfqcrv460hlt75.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.azkaradmin.app"
+              }
+            }
+          ]
         }
       }
     }

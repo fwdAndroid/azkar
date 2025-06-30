@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA8H1jGg2pLe03IE2wSOWAK_KEJbB4IAlw',
-    appId: '1:296955372663:android:9944a545234d242a449272',
-    messagingSenderId: '296955372663',
-    projectId: 'azkar-4a907',
-    storageBucket: 'azkar-4a907.firebasestorage.app',
+    apiKey: 'AIzaSyCDiVeIJnu9JtL54pgSwSeUR57Accp6yz4',
+    appId: '1:309649663701:android:0b6220cdcd49dc6356a45c',
+    messagingSenderId: '309649663701',
+    projectId: 'star-44459',
+    storageBucket: 'star-44459.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC-EK9DwGui9UvGS5xqsj7W4tTu9KWR4GM',
-    appId: '1:296955372663:ios:808b4cdb1d44d50e449272',
-    messagingSenderId: '296955372663',
-    projectId: 'azkar-4a907',
-    storageBucket: 'azkar-4a907.firebasestorage.app',
+    apiKey: 'AIzaSyDIkpURSf808H6TqPrDoVq0V6v1Awpl-Q0',
+    appId: '1:309649663701:ios:d47053e2b783d4ad56a45c',
+    messagingSenderId: '309649663701',
+    projectId: 'star-44459',
+    storageBucket: 'star-44459.appspot.com',
+    iosClientId: '309649663701-dvnpp6m71k3hu8da7q07ljrd8ca9lfmf.apps.googleusercontent.com',
     iosBundleId: 'com.example.azkar',
   );
 }
