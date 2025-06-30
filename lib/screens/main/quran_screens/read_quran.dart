@@ -1,90 +1,79 @@
-import 'package:azkar/api/api_calls.dart';
-import 'package:azkar/model/quran_model.dart';
-import 'package:azkar/provider/language_provider.dart';
-import 'package:azkar/screens/main/quran_screens/surah_detail_screen.dart';
+import 'package:azkar/provider/font_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran/quran.dart' as quran;
 
-class ReadQuran extends StatefulWidget {
+class ReadQuran extends StatelessWidget {
   const ReadQuran({super.key});
 
   @override
-  State<ReadQuran> createState() => _ReadQuranState();
-}
-
-class _ReadQuranState extends State<ReadQuran> {
-  late Future<QuranModel> _quranText;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _quranText = ApiCalls().getQuranText();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+    final fontSettings = Provider.of<FontSettings>(context);
 
-    return FutureBuilder<QuranModel>(
-      future: _quranText,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data!.data!.surahs!.length,
-            itemBuilder: (BuildContext context, int index) {
-              var surah = snapshot.data!.data!.surahs![index];
-              return InkWell(
-                onTap: () => {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => SuratDetailsPage(snap: surah),
+    return Scaffold(
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: ListView.builder(
+          itemCount: quran.totalSurahCount,
+          itemBuilder: (context, surahIndex) {
+            int surahNum = surahIndex + 1;
+            int verseCount = quran.getVerseCount(surahNum);
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // 🕌 Surah name header
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  child: Center(
+                    child: Text(
+                      '${quran.getSurahName(surahNum)} (${quran.getSurahNameEnglish(surahNum)})',
+                      style: TextStyle(
+                        fontSize: fontSettings.fontSize + 4,
+                        fontFamily: fontSettings.fontFamily,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                },
-                child: Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: const Color(
-                      0xFFD9D9D9,
-                    ).withOpacity(0.19), // 19% opacity
-                  ),
-                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  width: MediaQuery.of(this.context).size.width,
-                  // height: 100,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        surah.name!,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                        ),
-                      ),
-
-                      Text(
-                        surah.revelationType!.toString().substring(15) +
-                                ' • ' +
-                                surah.ayahs!.length.toString() +
-                                languageProvider.localizedStrings["Verses"] ??
-                            ' Verses',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              );
-            },
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+
+                // 📖 Ayahs list
+                ListView.builder(
+                  itemCount: verseCount,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, ayahIndex) {
+                    final ayah = quran.getVerse(
+                      surahNum,
+                      ayahIndex + 1,
+                      verseEndSymbol: true,
+                    );
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 6,
+                        horizontal: 12,
+                      ),
+                      child: Text(
+                        ayah,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: fontSettings.fontSize,
+                          fontFamily: fontSettings.fontFamily,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                const Divider(thickness: 1),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }
