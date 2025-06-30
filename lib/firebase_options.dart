@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCDiVeIJnu9JtL54pgSwSeUR57Accp6yz4',
-    appId: '1:309649663701:android:0b6220cdcd49dc6356a45c',
+    appId: '1:309649663701:android:ceed72c7d8e2b58956a45c',
     messagingSenderId: '309649663701',
     projectId: 'star-44459',
     storageBucket: 'star-44459.appspot.com',
@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDIkpURSf808H6TqPrDoVq0V6v1Awpl-Q0',
-    appId: '1:309649663701:ios:d47053e2b783d4ad56a45c',
+    appId: '1:309649663701:ios:dab075e704c016e356a45c',
     messagingSenderId: '309649663701',
     projectId: 'star-44459',
     storageBucket: 'star-44459.appspot.com',
-    iosClientId: '309649663701-dvnpp6m71k3hu8da7q07ljrd8ca9lfmf.apps.googleusercontent.com',
-    iosBundleId: 'com.example.azkar',
+    iosClientId: '309649663701-gteu24nmtt9gl90kbe8e0ilpk5laukdk.apps.googleusercontent.com',
+    iosBundleId: 'com.azkar.app',
   );
 }
