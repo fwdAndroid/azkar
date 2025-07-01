@@ -1,4 +1,6 @@
 import 'package:azkar/provider/language_provider.dart';
+import 'package:azkar/screens/surah/surah_kahaf.dart';
+import 'package:azkar/screens/surah/surah_yasin.dart';
 import 'package:azkar/screens/view/view_azkars.dart';
 import 'package:azkar/widgets/azkar_title_widget.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
@@ -196,6 +198,25 @@ class _AzkarPageState extends State<AzkarPage> {
                         ],
                       );
                     },
+                  ),
+                  //Surah AlKahaf
+                  AzkarTitleWidget(
+                    image: "assets/books.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => SurahYasinPage()),
+                    ),
+                    text: "سورة يس",
+                  ),
+
+                  //Surah AlKahaf
+                  AzkarTitleWidget(
+                    image: "assets/books.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => OpenSurahPage()),
+                    ),
+                    text: "سورة الكهف",
                   ),
 
                   // Azkar Sections
