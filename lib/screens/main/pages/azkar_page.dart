@@ -199,7 +199,17 @@ class _AzkarPageState extends State<AzkarPage> {
                       );
                     },
                   ),
-                  //Surah AlKahaf
+                  //Ayat ul kursis
+                  AzkarTitleWidget(
+                    image: "assets/books.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => SurahYasinPage()),
+                    ),
+                    text: "آية الكرسي",
+                  ),
+
+                  //Surah Yasin
                   AzkarTitleWidget(
                     image: "assets/books.png",
                     onTap: () => Navigator.push(
