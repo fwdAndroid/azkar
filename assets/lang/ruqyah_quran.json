@@ -1,0 +1,285 @@
+{
+  "ruqyah": [
+    {
+      "title": "الفاتحة",
+      "surah": 1,
+      "verses": [
+        {
+          "verse_key": "1:1",
+          "arabic": "ٱلْـحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+          "english": "All praise is for Allah—Lord of all worlds"
+        },
+        {
+          "verse_key": "1:2",
+          "arabic": "ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+          "english": "The Most Compassionate, Most Merciful"
+        },
+        {
+          "verse_key": "1:3",
+          "arabic": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
+          "english": "Master of the Day of Judgment"
+        },
+        {
+          "verse_key": "1:4",
+          "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+          "english": "You ˹alone˺ we worship and You ˹alone˺ we ask for help"
+        },
+        {
+          "verse_key": "1:5",
+          "arabic": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+          "english": "Guide us along the Straight Path"
+        },
+        {
+          "verse_key": "1:6",
+          "arabic": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ",
+          "english": "The path of those You have blessed"
+        },
+        {
+          "verse_key": "1:7",
+          "arabic": "غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+          "english": "Not those You are displeased with, or those who are astray"
+        }
+      ]
+    },
+    {
+      "title": "سورة البقرة",
+      "surah": 2,
+      "verses": [
+        {
+          "verse_key": "2:1",
+          "arabic": "الم",
+          "english": "Alif-Lam-Meem."
+        },
+        {
+          "verse_key": "2:2",
+          "arabic": "ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ",
+          "english": "This is the Book about which there is no doubt, a guidance for those conscious of Allah."
+        },
+        {
+          "verse_key": "2:3",
+          "arabic": "ٱلَّذِينَ يُؤۡمِنُونَ بِٱلۡغَيۡبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقۡنَـٰهُمۡ يُنفِقُونَ",
+          "english": "Who believe in the unseen, establish prayer, and spend out of what We have provided for them."
+        },
+        {
+          "verse_key": "2:255",
+          "arabic": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ٱلْحَيُّ ٱلْقَيُّومُ...",
+          "english": "Allah! There is no deity except Him, the Ever-Living, the Sustainer..."
+        },
+        {
+          "verse_key": "2:285",
+          "arabic": "آمَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيْهِ...",
+          "english": "The Messenger has believed in what was revealed to him from his Lord..."
+        },
+        {
+          "verse_key": "2:286",
+          "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا...",
+          "english": "Allah does not burden a soul beyond that it can bear..."
+        }
+      ]
+    },
+    {
+      "title": "الأعراف",
+      "surah": 7,
+      "verses": [
+        {
+          "verse_key": "7:54",
+          "arabic": "إِنَّ رَبَّكُمُ ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ...",
+          "english": "Indeed your Lord is Allah, who created the heavens and the earth..."
+        }
+      ]
+    },
+    {
+      "title": "المؤمنون",
+      "surah": 23,
+      "verses": [
+        {
+          "verse_key": "23:115",
+          "arabic": "أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَـٰكُمْ عَبَثًا...",
+          "english": "Did you then think that We created you without purpose..."
+        }
+      ]
+    },
+    {
+      "title": "الصافات",
+      "surah": 37,
+      "verses": [
+        {
+          "verse_key": "37:1",
+          "arabic": "وَٱلصَّافَّـٰتِ صَفًّا",
+          "english": "By those ˹angels˺ lined up in rows"
+        },
+        {
+          "verse_key": "37:2",
+          "arabic": "فَٱلزَّٰجِرَٰتِ زَجْرًا",
+          "english": "And those who scold severely"
+        },
+        {
+          "verse_key": "37:3",
+          "arabic": "فَٱلتَّـٰلِيَـٰتِ ذِكْرًا",
+          "english": "And those who recite the message"
+        },
+        {
+          "verse_key": "37:4",
+          "arabic": "إِنَّ إِلَـٰهَكُمْ لَوَٰحِدٌ",
+          "english": "Surely your God is indeed One"
+        }
+      ]
+    },
+    {
+      "title": "الرحمن",
+      "surah": 55,
+      "verses": [
+        {
+          "verse_key": "55:33",
+          "arabic": "يَـٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ...",
+          "english": "O assembly of jinn and humans..."
+        },
+        {
+          "verse_key": "55:34",
+          "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+          "english": "Then which of the favors of your Lord will you both deny?"
+        }
+      ]
+    },
+    {
+      "title": "الحشر",
+      "surah": 59,
+      "verses": [
+        {
+          "verse_key": "59:21",
+          "arabic": "لَوْ أَنزَلْنَا هَـٰذَا ٱلْقُرْءَانَ...",
+          "english": "Had We sent down this Quran upon a mountain..."
+        },
+        {
+          "verse_key": "59:22",
+          "arabic": "",
+          "english": ""
+        },
+        {
+          "verse_key": "59:23",
+          "arabic": "",
+          "english": ""
+        },
+        {
+          "verse_key": "59:24",
+          "arabic": "",
+          "english": ""
+        }
+      ]
+    },
+    {
+      "title": "الجن",
+      "surah": 72,
+      "verses": [
+        {
+          "verse_key": "72:1",
+          "arabic": "",
+          "english": ""
+        },
+        {
+          "verse_key": "72:2",
+          "arabic": "",
+          "english": ""
+        },
+        {
+          "verse_key": "72:3",
+          "arabic": "",
+          "english": ""
+        }
+      ]
+    },
+    {
+      "title": "الإخلاص",
+      "surah": 112,
+      "verses": [
+        {
+          "verse_key": "112:1",
+          "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+          "english": "Say, ˹O Prophet,˺ “He is Allah—One"
+        },
+        {
+          "verse_key": "112:2",
+          "arabic": "ٱللَّهُ ٱلصَّمَدُ",
+          "english": "Allah—the Sustainer ˹needed by all˺"
+        },
+        {
+          "verse_key": "112:3",
+          "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+          "english": "He has never had offspring, nor was He born"
+        },
+        {
+          "verse_key": "112:4",
+          "arabic": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ",
+          "english": "And there is none comparable to Him"
+        }
+      ]
+    },
+    {
+      "title": "الفلق",
+      "surah": 113,
+      "verses": [
+        {
+          "verse_key": "113:1",
+          "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
+          "english": "Say, “I seek refuge in the Lord of daybreak”"
+        },
+        {
+          "verse_key": "113:2",
+          "arabic": "مِن شَرِّ مَا خَلَقَ",
+          "english": "from the evil of whatever He has created"
+        },
+        {
+          "verse_key": "113:3",
+          "arabic": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+          "english": "and from the evil of the night when it grows dark"
+        },
+        {
+          "verse_key": "113:4",
+          "arabic": "وَمِن شَرِّ ٱلنَّفَّـٰثَٰتِ فِى ٱلْعُقَدِ",
+          "english": "and from the evil of those who practice witchcraft when they blow in the knots"
+        },
+        {
+          "verse_key": "113:5",
+          "arabic": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+          "english": "and from the evil of an envier when they envy"
+        }
+      ]
+    },
+    {
+      "title": "الناس",
+      "surah": 114,
+      "verses": [
+        {
+          "verse_key": "114:1",
+          "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+          "english": "Say, “I seek refuge in the Lord of humankind”"
+        },
+        {
+          "verse_key": "114:2",
+          "arabic": "مَلِكِ ٱلنَّاسِ",
+          "english": "the Master of humankind"
+        },
+        {
+          "verse_key": "114:3",
+          "arabic": "إِلَـٰهِ ٱلنَّاسِ",
+          "english": "the God of humankind"
+        },
+        {
+          "verse_key": "114:4",
+          "arabic": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
+          "english": "from the evil of the lurking whisperer"
+        },
+        {
+          "verse_key": "114:5",
+          "arabic": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
+          "english": "who whispers into the hearts of humankind"
+        },
+        {
+          "verse_key": "114:6",
+          "arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+          "english": "from among jinn and humankind"
+        }
+      ]
+    }
+  ]
+}

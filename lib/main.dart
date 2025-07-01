@@ -3,6 +3,7 @@ import 'package:azkar/provider/font_provider.dart';
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/prayer_time_provider.dart';
 import 'package:azkar/provider/theme_provider.dart';
+import 'package:azkar/screens/dua/ruqqah_for_quran.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
