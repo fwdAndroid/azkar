@@ -147,91 +147,95 @@ class _AyatAlKursiScreenState extends State<AyatAlKursiScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
-                child: Text(
-                  ayahText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: fontSettings.fontSize + 4,
-                    fontFamily: fontSettings.fontFamily,
-                    height: 2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.75),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Slider(
-                    activeColor: Colors.greenAccent,
-                    inactiveColor: Colors.white24,
-                    value: _position.inSeconds.toDouble().clamp(
-                      0.0,
-                      _duration.inSeconds.toDouble(),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(
+                    ayahText,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: fontSettings.fontSize + 4,
+                      fontFamily: fontSettings.fontFamily,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                    min: 0,
-                    max: _duration.inSeconds.toDouble(),
-                    onChanged: (value) {
-                      _audioPlayer.seek(Duration(seconds: value.toInt()));
-                    },
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        formatTime(_position),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        formatTime(_duration),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          isRepeating ? Icons.repeat_one : Icons.repeat,
-                          color: isRepeating
-                              ? Colors.greenAccent
-                              : Colors.white,
-                        ),
-                        onPressed: toggleRepeat,
-                      ),
-                      const SizedBox(width: 30),
-                      IconButton(
-                        icon: Icon(
-                          isPlaying
-                              ? Icons.pause_circle_filled
-                              : Icons.play_circle_fill,
-                          size: 60,
-                          color: Colors.white,
-                        ),
-                        onPressed: toggleAudio,
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.75),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Slider(
+                      activeColor: Colors.greenAccent,
+                      inactiveColor: Colors.white24,
+                      value: _position.inSeconds.toDouble().clamp(
+                        0.0,
+                        _duration.inSeconds.toDouble(),
+                      ),
+                      min: 0,
+                      max: _duration.inSeconds.toDouble(),
+                      onChanged: (value) {
+                        _audioPlayer.seek(Duration(seconds: value.toInt()));
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          formatTime(_position),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          formatTime(_duration),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            isRepeating ? Icons.repeat_one : Icons.repeat,
+                            color: isRepeating
+                                ? Colors.greenAccent
+                                : Colors.white,
+                          ),
+                          onPressed: toggleRepeat,
+                        ),
+                        const SizedBox(width: 30),
+                        IconButton(
+                          icon: Icon(
+                            isPlaying
+                                ? Icons.pause_circle_filled
+                                : Icons.play_circle_fill,
+                            size: 60,
+                            color: Colors.white,
+                          ),
+                          onPressed: toggleAudio,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
