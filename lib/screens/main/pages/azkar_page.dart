@@ -6,6 +6,7 @@ import 'package:azkar/screens/surah/ayat_ul_karsi.dart';
 import 'package:azkar/screens/surah/surah_kahaf.dart';
 import 'package:azkar/screens/surah/surah_yasin.dart';
 import 'package:azkar/screens/view/view_azkars.dart';
+import 'package:azkar/screens/view/view_dua.dart';
 import 'package:azkar/widgets/azkar_title_widget.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -104,93 +105,104 @@ class _AzkarPageState extends State<AzkarPage> {
                                 final post =
                                     posts[index].data() as Map<String, dynamic>;
 
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: const Color(
-                                      0xFFD9D9D9,
-                                    ).withOpacity(0.19),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.05),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (builder) =>
+                                            ViewDuaPage(uuid: post['uuid']),
                                       ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          languageProvider
-                                                  .localizedStrings["Today's Dua"] ??
-                                              "Today's Dua",
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              post['dua'] ?? '',
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                        // 👇 Page Indicator below the PageView
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 16.0,
-                                            top: 8,
-                                          ),
-                                          child: Row(
-                                            children: List.generate(
-                                              posts.length,
-                                              (index) {
-                                                bool isActive =
-                                                    (_pageController
-                                                        .hasClients &&
-                                                    _pageController.page
-                                                            ?.round() ==
-                                                        index);
-
-                                                return AnimatedContainer(
-                                                  duration: const Duration(
-                                                    milliseconds: 300,
-                                                  ),
-                                                  margin:
-                                                      const EdgeInsets.symmetric(
-                                                        horizontal: 4,
-                                                      ),
-                                                  width: isActive ? 12 : 8,
-                                                  height: isActive ? 12 : 8,
-                                                  decoration: BoxDecoration(
-                                                    color: isActive
-                                                        ? Colors.white
-                                                        : Colors.white54,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(
+                                        0xFFD9D9D9,
+                                      ).withOpacity(0.19),
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.05),
+                                          blurRadius: 4,
+                                          offset: const Offset(0, 2),
                                         ),
                                       ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            languageProvider
+                                                    .localizedStrings["Today's Dua"] ??
+                                                "Today's Dua",
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                post['dua'] ?? '',
+                                                style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                          // 👇 Page Indicator below the PageView
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 16.0,
+                                              top: 8,
+                                            ),
+                                            child: Row(
+                                              children: List.generate(
+                                                posts.length,
+                                                (index) {
+                                                  bool isActive =
+                                                      (_pageController
+                                                          .hasClients &&
+                                                      _pageController.page
+                                                              ?.round() ==
+                                                          index);
+
+                                                  return AnimatedContainer(
+                                                    duration: const Duration(
+                                                      milliseconds: 300,
+                                                    ),
+                                                    margin:
+                                                        const EdgeInsets.symmetric(
+                                                          horizontal: 4,
+                                                        ),
+                                                    width: isActive ? 12 : 8,
+                                                    height: isActive ? 12 : 8,
+                                                    decoration: BoxDecoration(
+                                                      color: isActive
+                                                          ? Colors.white
+                                                          : Colors.white54,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
