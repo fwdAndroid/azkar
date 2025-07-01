@@ -17,6 +17,8 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   TextEditingController nameController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool _isLoading = false;
 
   @override
@@ -35,6 +37,8 @@ class _EditProfileState extends State<EditProfile> {
 
     setState(() {
       nameController.text = data['username'] ?? '';
+      locationController.text = data['address'] ?? "";
+      phoneController.text = data['phone'] ?? "";
     });
   }
 
@@ -91,6 +95,41 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
+                    child: TextField(
+                      controller: locationController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: "Location",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
+                    child: TextField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.numberWithOptions(),
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: "Phone Number",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -120,7 +159,11 @@ class _EditProfileState extends State<EditProfile> {
                             await FirebaseFirestore.instance
                                 .collection("users")
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({"username": nameController.text});
+                                .update({
+                                  "username": nameController.text,
+                                  "address": locationController.text,
+                                  "phone": phoneController.text,
+                                });
                             showMessageBar(
                               languageProvider
                                       .localizedStrings["Successfully Updated Profile"] ??
